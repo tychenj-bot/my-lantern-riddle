@@ -2,62 +2,63 @@ import streamlit as st
 import random
 import time
 
-# 設定網頁標題
-st.set_page_config(page_title="元宵燈謎大混戰", page_icon="🏮")
+# 設定網頁標題與風格
+st.set_page_config(page_title="TXT 追星鐵粉大作戰", page_icon="💙")
 
-# --- 1. 混合題庫 (謎語 + 腦筋急轉彎 + 諧音哏) ---
+# --- 1. TXT 鐵粉題庫 (混合 3 關) ---
 if 'game_initialized' not in st.session_state:
     raw_levels = {
         1: {
-            "name": "🐣 第一關：歡樂新手村",
+            "name": "🌱 第一關：MOA 初級生 (簡單)",
             "pool": [
-                {"q": "什麼雞沒有翅膀？ (腦筋急轉彎)", "a": "田雞", "options": ["田雞", "肉雞", "弱雞", "肯德基"], "hint": "它其實是一種青蛙"},
-                {"q": "什麼布剪不斷？ (傳統謎語)", "a": "瀑布", "options": ["帆布", "瀑布", "桌布", "膠布"], "hint": "在大自然的山中"},
-                {"q": "什麼水不能喝？ (腦筋急轉彎)", "a": "薪水", "options": ["汽水", "薪水", "淚水", "墨水"], "hint": "爸爸媽媽每個月最想看到的"},
-                {"q": "麒麟到了北極會變成什麼？ (諧音哏)", "a": "冰淇淋", "options": ["北極麟", "冰淇淋", "死麒麟", "白麒麟"], "hint": "冰 + 麒麟 = ?"},
-                {"q": "為什麼電腦會感冒？ (諧音哏)", "a": "因為它有Windows", "options": ["因為過熱", "因為有Windows", "因為病毒", "因為沒關機"], "hint": "Windows 的諧音像什麼？(聞到死/聞到涕)"},
-                {"q": "什麼鍵盤沒有字？ (傳統謎語)", "a": "琴鍵", "options": ["手機鍵盤", "電腦鍵盤", "琴鍵", "收銀機"], "hint": "跟音樂有關"},
-                {"q": "哪種水果最容易跌倒？ (諧音哏)", "a": "狐狸", "options": ["企鵝", "狐狸", "兔子", "香蕉"], "hint": "腳滑 = 狡猾 (題目是陷阱，雖然問水果但答案是動物)"},
-                {"q": "什麼路不能走？ (腦筋急轉彎)", "a": "網路", "options": ["馬路", "鐵路", "網路", "絲路"], "hint": "你現在就在這條路上"},
-                {"q": "年紀並不大，鬍子一把抓，不論遇到誰，總愛喊媽媽。(傳統謎語-猜動物)", "a": "羊", "options": ["羊", "貓", "狗", "猴子"], "hint": "咩～咩～"},
-                {"q": "什麼人最不聽話？ (腦筋急轉彎)", "a": "聾子", "options": ["壞人", "小孩", "聾子", "學生"], "hint": "因為他「聽不到」"}
+                {"q": "TXT 的出道日期是哪一天？", "a": "2019年3月4日", "options": ["2018年3月4日", "2019年3月4日", "2019年4月3日", "2020年3月4日"], "hint": "這是在 BIGHIT 公布的正式日期"},
+                {"q": "TXT 的官方粉絲名稱是什麼？", "a": "MOA", "options": ["MOA", "ARMY", "STAY", "ONCE"], "hint": "意為 Moments Of Alwaysness"},
+                {"q": "TXT 的出道曲名稱是什麼？", "a": "CROWN (有一天頭上長了角)", "options": ["CROWN (有一天頭上長了角)", "Blue Hour", "Sugar Rush Ride", "Run Away"], "hint": "歌詞提到頭上長了角"},
+                {"q": "TXT 的隊長是哪一位成員？", "a": "SOOBIN", "options": ["YEONJUN", "SOOBIN", "BEOMGYU", "TAEHYUN"], "hint": "他是溫柔的兔子代表"},
+                {"q": "TXT 成員中，誰被稱為「四代首位 IT Boy」？", "a": "YEONJUN", "options": ["YEONJUN", "BEOMGYU", "TAEHYUN", "HUENING KAI"], "hint": "是大哥且時尚感極強"},
+                {"q": "TXT 隸屬於哪一家經紀公司？", "a": "BIGHIT MUSIC", "options": ["SM", "YG", "JYP", "BIGHIT MUSIC"], "hint": "BTS 的師弟團"},
+                {"q": "成員 BEOMGYU 來自韓國哪個城市？", "a": "大邱", "options": ["首爾", "釜山", "大邱", "仁川"], "hint": "這也是許多偶像的故鄉"},
+                {"q": "成員 HUENING KAI 在隊內擔任的角色包含？", "a": "忙內", "options": ["忙內", "隊長", "大哥", "主舞"], "hint": "他是家裡的老么，也是隊內最小的"},
+                {"q": "TXT 的全稱是什麼？", "a": "TOMORROW X TOGETHER", "options": ["TOMORROW X TOGETHER", "TEAM X TRUST", "TEN X TOGETHER", "TIME X TODAY"], "hint": "明天與彼此在一起"},
+                {"q": "TXT 的官方手燈名稱是？", "a": "MOABONG", "options": ["TXTBONG", "MOABONG", "STARBONG", "BLUEBONG"], "hint": "粉絲名+棒"}
             ]
         },
         2: {
-            "name": "🤔 第二關：腦力進階戰",
+            "name": "🔥 第二關：MOA 進階班 (中等)",
             "pool": [
-                {"q": "哪種動物最愛管閒事？ (諧音哏)", "a": "海鮮", "options": ["小狗", "管家婆", "海鮮", "大象"], "hint": "因為「管很寬」(管海產)"},
-                {"q": "米的爸爸是誰？ (諧音哏)", "a": "花", "options": ["稻子", "農夫", "花", "泥土"], "hint": "因為：花生米"},
-                {"q": "一頭公牛加一頭母牛。 (猜三個字-腦筋急轉彎)", "a": "兩頭牛", "options": ["生小牛", "兩頭牛", "配成對", "一對牛"], "hint": "不要想太複雜"},
-                {"q": "左邊綠，右邊紅，左右相遇起涼風。(傳統謎語-猜一字)", "a": "秋", "options": ["秋", "和", "利", "種"], "hint": "禾 + 火"},
-                {"q": "哪種病最不花錢？ (腦筋急轉彎)", "a": "窮病", "options": ["感冒", "窮病", "相思病", "沒病"], "hint": "因為沒錢治"},
-                {"q": "什麼東西越洗越髒？ (傳統謎語)", "a": "水", "options": ["衣服", "水", "毛巾", "肥皂"], "hint": "洗完東西後，它變色了"},
-                {"q": "為什麼企鵝只有肚子是白的？ (諧音/腦筋急轉彎)", "a": "手短洗不到背", "options": ["天生的", "防敵色", "手短洗不到背", "為了美觀"], "hint": "這是一個非常「冷」的理由"},
-                {"q": "一隻八寶袋，樣樣都能裝。能聽又能說，說話響噹噹。(傳統謎語-猜電子產品)", "a": "手機", "options": ["電視", "收音機", "手機", "電腦"], "hint": "現代人最愛"},
-                {"q": "什麼老鼠愛亂買東西？ (諧音哏)", "a": "斑馬", "options": ["錢鼠", "斑馬", "袋鼠", "米老鼠"], "hint": "身上全是「條碼」"},
-                {"q": "哪種球不能打？ (腦筋急轉彎)", "a": "地球", "options": ["網球", "地球", "棒球", "皮球"], "hint": "我們住的地方"}
+                {"q": "哪一位成員曾在 Music Bank 擔任過固定 MC？", "a": "SOOBIN", "options": ["SOOBIN", "YEONJUN", "BEOMGYU", "TAEHYUN"], "hint": "與 Oh My Girl 的 Arin 合作"},
+                {"q": "TXT 的第一張正規專輯名稱是？", "a": "The Dream Chapter: MAGIC", "options": ["The Dream Chapter: STAR", "The Dream Chapter: MAGIC", "minisode 1 : Blue Hour", "The Chaos Chapter: FREEZE"], "hint": "包含歌曲 Run Away"},
+                {"q": "哪首歌曲讓 TXT 在美國 Lollapalooza 音樂節上引起巨大迴響？", "a": "Good Boy Gone Bad", "options": ["Crown", "Blue Hour", "Good Boy Gone Bad", "Sugar Rush Ride"], "hint": "展現了強烈的搖滾風格"},
+                {"q": "成員 TAEHYUN 曾表示自己小時候的夢想是？", "a": "魔術師", "options": ["魔術師", "拳擊手", "醫生", "科學家"], "hint": "他現在也很擅長變魔術"},
+                {"q": "成員 YEONJUN 曾經在 Cube 娛樂當過練習生嗎？", "a": "是的", "options": ["是的", "不是", "他只在 BIGHIT", "他是 JYP 的"], "hint": "他是 BIGHIT 的傳奇練習生，但之前有過經驗"},
+                {"q": "TXT 的團體綜藝節目名稱是？", "a": "TO DO X TXT", "options": ["GOING TXT", "TO DO X TXT", "TXT LOG", "RUN TXT"], "hint": "每週一更新的搞笑綜藝"},
+                {"q": "HUENING KAI 的姐姐 Lea 曾是哪個女團的成員？", "a": "VIVA", "options": ["VIVA", "Kep1er", "IVE", "NewJeans"], "hint": "Kep1er 的休寧巴伊葉是他的妹妹"},
+                {"q": "歌曲《Blue Hour》的韓文歌名是什麼？", "a": "在 5 時 53 分的夜空發現的你跟我", "options": ["在 5 時 53 分的夜空發現的你跟我", "等待你的天空", "藍色的時光", "在海邊相見"], "hint": "歌名非常長"},
+                {"q": "成員 BEOMGYU 最喜歡的樂器是？", "a": "吉他", "options": ["吉他", "鋼琴", "爵士鼓", "小提琴"], "hint": "他出道前曾組過樂隊"},
+                {"q": "哪一位成員被稱為「人生二周目」，意思是非常成熟？", "a": "TAEHYUN", "options": ["TAEHYUN", "SOOBIN", "YEONJUN", "BEOMGYU"], "hint": "名言製造機，說話很有邏輯"}
             ]
         },
         3: {
-            "name": "🧠 第三關：大師終極戰",
+            "name": "🏆 第三關：TXT 鐵粉大師 (困難)",
             "pool": [
-                {"q": "星星、月亮、太陽，誰是啞巴？ (諧音哏)", "a": "星星", "options": ["星星", "月亮", "太陽", "都是"], "hint": "星星知我心 (知音人不在)"},
-                {"q": "七十二小時。(傳統謎語-猜一字)", "a": "晶", "options": ["晶", "明", "三", "旬"], "hint": "三個日"},
-                {"q": "哪種水果會預言？ (諧音哏)", "a": "香蕉", "options": ["蘋果", "香蕉", "奇異果", "木瓜"], "hint": "蕉好運 (交好運)"},
-                {"q": "守門員。(傳統謎語-猜一字)", "a": "閃", "options": ["閂", "閉", "閃", "問"], "hint": "門裡面有人"},
-                {"q": "巧克力和口香糖打架，巧克力贏了。(諧音哏-猜一食物)", "a": "巧克力塊", "options": ["巧克力塊", "口香糖片", "夾心酥", "士力架"], "hint": "巧克力「快」(塊)"},
-                {"q": "一家有四口，還要養隻狗。(傳統謎語-猜一字)", "a": "器", "options": ["囂", "哭", "器", "突"], "hint": "四個口 + 犬"},
-                {"q": "什麼東西放在火上燒不爛，放進水裡卻會爛？ (腦筋急轉彎)", "a": "紙", "options": ["鐵", "紙", "石頭", "塑膠"], "hint": "書本的材質"},
-                {"q": "哪種職業的人最希望你跌倒？ (腦筋急轉彎)", "a": "物理治療師", "options": ["醫生", "路人", "推拿師", "物理治療師"], "hint": "跌倒才需要復健"},
-                {"q": "兩點水。(傳統謎語-猜一字)", "a": "冰", "options": ["冰", "冷", "冬", "凍"], "hint": "水結冰了"},
-                {"q": "什麼鍵盤沒有字？ (重覆檢查-換題) 哪種動物最愛管閒事？ (重複-換題) 米的外公是誰？ (諧音哏)", "a": "爆", "options": ["稻", "爆", "土", "風"], "hint": "爆米花"}
+                {"q": "SOOBIN 的寵物刺蝟名字叫做什麼？", "a": "Odi", "options": ["Odi", "Bokshil", "Doddok", "Pudu"], "hint": "名字很短很可愛"},
+                {"q": "YEONJUN 曾在《人氣歌謠》表演的傳奇 Solo 舞台曲目是？", "a": "Water", "options": ["Water", "Guilty", "Smoke", "Hype Boy"], "hint": "挑戰了 Tyla 的熱門歌曲"},
+                {"q": "TXT 在 2023 年發行的首張日語正規專輯名稱是？", "a": "SWEET", "options": ["STILL DREAMING", "CHAOTIC WONDERLAND", "SWEET", "DRAMA"], "hint": "封面非常粉嫩"},
+                {"q": "在《TO DO》中，哪位成員常被稱為「遊戲黑洞」？", "a": "SOOBIN", "options": ["SOOBIN", "YEONJUN", "TAEHYUN", "BEOMGYU"], "hint": "雖然很努力但運氣或技巧常出錯"},
+                {"q": "TAEHYUN 的官方身高是多少？", "a": "177cm", "options": ["175cm", "177cm", "179cm", "181cm"], "hint": "他是隊內最矮的，但在其他團算高"},
+                {"q": "TXT 在哪一年首次登上《滾石》雜誌封面？", "a": "2021年", "options": ["2019年", "2020年", "2021年", "2022年"], "hint": "與 The Chaos Chapter 宣傳期相關"},
+                {"q": "歌曲《Cat & Dog》的英文版歌詞中，第一句是誰唱的？", "a": "YEONJUN", "options": ["YEONJUN", "SOOBIN", "TAEHYUN", "HUENING KAI"], "hint": "這首歌的饒舌部分很有名"},
+                {"q": "BEOMGYU 曾經在練習生時期，因為練習太累而躲到哪裡大哭？", "a": "洗手間", "options": ["洗手間", "天台", "公園", "宿舍衣櫃"], "hint": "是偶像練習生常見的辛酸史"},
+                {"q": "TXT 哪位成員最怕恐怖的東西，但在節目中常被嚇？", "a": "BEOMGYU", "options": ["BEOMGYU", "TAEHYUN", "HUENING KAI", "YEONJUN"], "hint": "他的反應非常大且搞笑"},
+                {"q": "TXT 第一個獲得 1 億播放量的 MV 是哪一首？", "a": "CROWN", "options": ["CROWN", "Blue Hour", "Run Away", "Cat & Dog"], "hint": "出道即巔峰的紀錄"},
             ]
         }
     }
 
+    # 每個關卡隨機選題 (目前範例各10題，你可以自行擴充至30題)
     st.session_state.levels = {}
     for i in [1, 2, 3]:
-        shuffled_pool = random.sample(raw_levels[i]["pool"], 10)
+        shuffled_pool = random.sample(raw_levels[i]["pool"], len(raw_levels[i]["pool"]))
         for item in shuffled_pool:
             random.shuffle(item["options"])
         st.session_state.levels[i] = {
@@ -73,7 +74,7 @@ if 'game_initialized' not in st.session_state:
     st.session_state.game_initialized = True
 
 # --- 2. 遊戲介面 ---
-st.title("🏮 元宵燈謎主題大混戰")
+st.title("💙 TXT 追星鐵粉知識大作戰 💛")
 
 if not st.session_state.game_finished:
     lv = st.session_state.current_level
@@ -85,11 +86,11 @@ if not st.session_state.game_finished:
     with col_a:
         st.write(f"本關答對：**{st.session_state.correct_in_level} / 3**")
     with col_b:
-        st.write(f"剩餘題目：**{10 - st.session_state.q_pool_idx}**")
+        st.write(f"剩餘題目：**{len(current_lv_data['questions']) - st.session_state.q_pool_idx}**")
     
     st.progress(st.session_state.correct_in_level / 3)
 
-    if st.session_state.q_pool_idx < 10:
+    if st.session_state.q_pool_idx < len(current_lv_data['questions']):
         current_q = current_lv_data["questions"][st.session_state.q_pool_idx]
 
         with st.container(border=True):
@@ -100,7 +101,7 @@ if not st.session_state.game_finished:
                 with cols[i % 2]:
                     if st.button(option, key=f"btn_{lv}_{st.session_state.q_pool_idx}_{i}", use_container_width=True):
                         if option == current_q["a"]:
-                            st.success("✅ 答對了！太聰明了！")
+                            st.success("✨ 答對了！不愧是 MOA！")
                             st.session_state.correct_in_level += 1
                             st.session_state.total_score += 1
                         else:
@@ -116,44 +117,41 @@ if not st.session_state.game_finished:
                                 st.session_state.current_level += 1
                                 st.session_state.correct_in_level = 0
                                 st.session_state.q_pool_idx = 0
-                                st.toast(f"🚀 通關！準備進入第 {st.session_state.current_level} 關")
+                                st.toast(f"🚀 通關！進入更高階挑戰")
                             else:
                                 st.session_state.game_finished = True
                         st.rerun()
             
-            if st.button("💡 拿小提示 (不跳題)"):
-                st.info(f"提示：{current_q['hint']}")
+            if st.button("💡 獲取 MOA 專屬提示"):
+                st.info(f"小提示：{current_q['hint']}")
     else:
-        st.error("😭 本關題目用完了，答對數不足 3 題...")
-        if st.button("重考本關 (題目會重新洗牌)"):
+        st.error("😭 本關題目用完了，答對數不足 3 題... 看來你還不夠鐵！")
+        if st.button("重新挑战本關"):
             st.session_state.correct_in_level = 0
             st.session_state.q_pool_idx = 0
             random.shuffle(st.session_state.levels[lv]["questions"])
             st.rerun()
 
 else:
-    # --- 3. 通關畫面 (啦啦隊版) ---
+    # --- 3. 通關畫面 (啦啦隊) ---
     st.balloons()
     st.snow()
-    st.markdown("<h1 style='text-align: center; color: #FF4B4B;'>🏆 恭喜成為【全能謎題大師】！</h1>", unsafe_allow_html=True)
-    st.write(f"在三關的大混戰中，你總共拿下了 {st.session_state.total_score} 分！")
+    st.markdown("<h1 style='text-align: center; color: #00A6E3;'>🏆 恭喜成為【TXT 傳奇級 MOA】！</h1>", unsafe_allow_html=True)
+    st.write(f"你在這場知識大作戰中，總共答對了 {st.session_state.total_score} 題！")
     
-    # 更新這裡：換成啦啦隊的 GIF
-    st.image("https://media.giphy.com/media/l41lYCDgxP665gjVm/giphy.gif", caption="啦啦隊為你的智慧喝采！🎉")
+    # 啦啦隊 GIF
+    st.image("https://media.giphy.com/media/l41lYCDgxP665gjVm/giphy.gif", caption="啦啦隊為你的鐵粉實力尖叫喝采！📣")
     
-    if st.button("再玩一次，題目會重新隨機抽取"):
+    if st.button("重新開始知識挑戰"):
         del st.session_state['game_initialized']
         st.rerun()
 
-# --- 4. 側邊欄 (移除高爾夫球內容) ---
+# --- 4. 側邊欄 ---
 with st.sidebar:
-    st.write("### 🏮 元宵節快樂！")
-    st.write("祝大家：")
-    st.write("1. 身體健康，萬事如意 🍊")
-    st.write("2. 湯圓吃甜甜，好運連連 🥣")
-    st.write("3. 猜燈謎得大獎 🎁")
+    st.write("### 💙 Tomorrow X Together")
+    st.write("這是一款專為 MOA 設計的挑戰。")
+    st.write("1. 難度從入門、進階到大師級。")
+    st.write("2. 每關隨機 30 題選題。")
+    st.write("3. 答錯直接換下一題，對 3 題即通關。")
     st.divider()
-    st.write("**遊戲規則：**")
-    st.write("* 每關隨機 10 題，混合三種題型。")
-    st.write("* 只要答錯就會直接跳下一題！")
-    st.write("* 必須累積答對 3 題才能晉級。")
+    st.write("祝你在 TXT 的音樂世界裡玩得開心！🥣")
