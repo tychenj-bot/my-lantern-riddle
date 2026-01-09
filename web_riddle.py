@@ -95,4 +95,62 @@ if not st.session_state.game_finished:
         with st.container(border=True):
             st.markdown(f"### Q{st.session_state.q_pool_idx + 1}: {current_q['q']}")
             
-            cols = st.
+            cols = st.columns(2)
+            for i, option in enumerate(current_q["options"]):
+                with cols[i % 2]:
+                    if st.button(option, key=f"btn_{lv}_{st.session_state.q_pool_idx}_{i}", use_container_width=True):
+                        if option == current_q["a"]:
+                            st.success("✅ 答對了！太聰明了！")
+                            st.session_state.correct_in_level += 1
+                            st.session_state.total_score += 1
+                        else:
+                            st.error(f"❌ 答錯了！正確答案是「{current_q['a']}」")
+                        
+                        time.sleep(1.2)
+                        st.session_state.q_pool_idx += 1
+                        
+                        if st.session_state.correct_in_level >= 3:
+                            if lv < 3:
+                                st.balloons()
+                                if lv == 2: st.snow()
+                                st.session_state.current_level += 1
+                                st.session_state.correct_in_level = 0
+                                st.session_state.q_pool_idx = 0
+                                st.toast(f"🚀 通關！準備進入第 {st.session_state.current_level} 關")
+                            else:
+                                st.session_state.game_finished = True
+                        st.rerun()
+            
+            if st.button("💡 拿小提示 (不跳題)"):
+                st.info(f"提示：{current_q['hint']}")
+    else:
+        st.error("😭 本關題目用完了，答對數不足 3 題...")
+        if st.button("重考本關 (題目會重新洗牌)"):
+            st.session_state.correct_in_level = 0
+            st.session_state.q_pool_idx = 0
+            random.shuffle(st.session_state.levels[lv]["questions"])
+            st.rerun()
+
+else:
+    # --- 3. 通關畫面 ---
+    st.balloons()
+    st.snow()
+    st.markdown("<h1 style='text-align: center; color: #FF4B4B;'>🏆 恭喜成為【全能謎題大師】！</h1>", unsafe_allow_html=True)
+    st.write(f"在三關的大混戰中，你總共拿下了 {st.session_state.total_score} 分！")
+    st.image("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHYybm9sY2p6Z3ZxdnEzdnN4Z3ZxdnEzdnN4Z3ZxdnEzdnN4Z3ZxdnEmeT1n/l0MYt5jPR6QX5pnqM/giphy.gif")
+    
+    if st.button("再玩一次，題目會重新隨機抽取"):
+        del st.session_state['game_initialized']
+        st.rerun()
+
+with st.sidebar:
+    st.write("### ⛳ 明日 1/10 大崗山球場見")
+    st.write("祝你在果嶺上：")
+    st.write("1. 思考像謎語一樣周全 🧠")
+    st.write("2. 反應像腦筋急轉彎一樣快 ⚡")
+    st.write("3. 開球遠到朋友都想講諧音哏說你「泰強了」🚀")
+    st.divider()
+    st.write("**遊戲規則：**")
+    st.write("* 每關隨機 10 題，混合三種題型。")
+    st.write("* 只要答錯就會直接跳下一題！")
+    st.write("* 必須累積答對 3 題才能晉級。")
