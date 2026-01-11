@@ -5,7 +5,7 @@ import time
 # 設定網頁標題與風格
 st.set_page_config(page_title="TXT 追星鐵粉大作戰", page_icon="💙")
 
-# 自定義 TXT 專屬 CSS 風格 (水藍色主題)
+# 自定義 TXT 專屬 CSS 風格
 st.markdown("""
     <style>
     .stApp { background-color: #F0F8FF; }
@@ -65,10 +65,10 @@ if 'game_initialized' not in st.session_state:
                 {"q": "在《TO DO》中，誰被稱為「遊戲破壞者」？", "a": "BEOMGYU", "options": ["SOOBIN", "YEONJUN", "BEOMGYU", "TAEHYUN"], "hint": "調皮搗蛋第一名"},
                 {"q": "哪位成員參與了《Maze in the Mirror》製作？", "a": "全體成員", "options": ["全體成員", "BEOMGYU", "YEONJUN", "TAEHYUN"], "hint": "自創曲"},
                 {"q": "TXT 首個進入 Billboard 200 前五名的專輯？", "a": "FREEZE", "options": ["STAR", "MAGIC", "FREEZE", "TEMPTATION"], "hint": "混沌章節"},
-                {"q": "HUENING KAI 領養的綠色兔子娃娃叫什麼？", "a": "Tobin", "options": ["Tobin", "Molang", "Pudu", "Doddok"], "hint": "跟 Soobin 相關"},
+                {"q": "哪位成員小時候住在美國使用的英文名是 Daniel Choi？", "a": "YEONJUN", "options": ["YEONJUN", "SOOBIN", "BEOMGYU", "HUENING KAI"], "hint": "他是團內的大哥"},
                 {"q": "哪首歌 MV 在塞班島拍攝？", "a": "LOVESONG (JP Ver.)", "options": ["LOVESONG (JP Ver.)", "Blue Hour", "Magic", "Crown"], "hint": "風景優美"},
                 {"q": "哪位成員最熱愛「草莓歐蕾」？", "a": "BEOMGYU", "options": ["BEOMGYU", "SOOBIN", "YEONJUN", "TAEHYUN"], "hint": "他曾多次提到"},
-                {"q": "YEONJUN 的英文名字是？", "a": "Daniel", "options": ["Daniel", "Kevin", "Leo", "Jason"], "hint": "小時候去過美國"},
+                {"q": "TAEHYUN 的官方英文名(藝名除外)常被稱為？", "a": "Terry", "options": ["Terry", "Daniel", "Ben", "Kevin"], "hint": "也是 T 開頭"},
                 {"q": "《Blue Hour》韓文歌名中的數字是？", "a": "5時53分", "options": ["5時53分", "6時30分", "4時15分", "7時21分"], "hint": "非常著名的數字"},
                 {"q": "TAEHYUN 被稱為「人生幾周目」？", "a": "2周目", "options": ["2周目", "3周目", "1周目", "5周目"], "hint": "因為很成熟"},
                 {"q": "TXT 成員曾全體客串過什麼？", "a": "韓劇 Live On", "options": ["韓劇 Live On", "動漫", "電影", "紀錄片"], "hint": "Yeonjun 有較多戲份"},
@@ -110,14 +110,14 @@ if 'game_initialized' not in st.session_state:
                 {"q": "哪位成員被稱為遊戲黑洞？", "a": "SOOBIN", "options": ["SOOBIN", "YEONJUN", "TAEHYUN", "BEOMGYU"], "hint": "努力但手氣差"},
                 {"q": "成員中誰的身高是 177cm？", "a": "TAEHYUN", "options": ["TAEHYUN", "BEOMGYU", "SOOBIN", "YEONJUN"], "hint": "隊內最小隻"},
                 {"q": "TXT 哪位成員最怕鬼且反應最大？", "a": "BEOMGYU", "options": ["BEOMGYU", "YEONJUN", "TAEHYUN", "HUENING KAI"], "hint": "反應超搞笑"},
-                {"q": "TXTDone 第一張預告照文字？", "a": "What do you do?", "options": ["What do you do?", "Who am I?", "Hello Tomorrow", "Together"], "hint": "問句"},
-                {"q": "成員 YEONJUN 的手掌寬度大約？", "a": "19cm", "options": ["15cm", "17cm", "19cm", "21cm"], "hint": "重複考驗"},
-                {"q": "哪位成員最喜歡薄荷巧克力？", "a": "YEONJUN/HUENING", "options": ["YEONJUN/HUENING", "SOOBIN", "BEOMGYU", "TAEHYUN"], "hint": "薄巧戰士"},
+                {"q": "第一張預告照出現的官網文字？", "a": "What do you do?", "options": ["What do you do?", "Who am I?", "Hello Tomorrow", "Together"], "hint": "問句"},
+                {"q": "BEOMGYU 練習生時期常吃哪種零食被發現？", "a": "餅乾", "options": ["餅乾", "炸雞", "冰淇淋", "拉麵"], "hint": "綜藝提過"},
+                {"q": "哪位成員英文名是 Daniel Choi？", "a": "YEONJUN", "options": ["YEONJUN", "SOOBIN", "BEOMGYU", "TAEHYUN"], "hint": "就是大哥！"},
                 {"q": "SOOBIN 的酒量大約？", "a": "半瓶燒酒", "options": ["半瓶燒酒", "三瓶燒酒", "一杯醉", "十瓶"], "hint": "自爆過"},
                 {"q": "哪位成員擅長拳擊？", "a": "TAEHYUN", "options": ["TAEHYUN", "YEONJUN", "SOOBIN", "BEOMGYU"], "hint": "練習生時期"},
                 {"q": "TXT 首個大賞獎項來自？", "a": "The Fact Music Awards", "options": ["The Fact", "MAMA", "MMA", "Golden Disc"], "hint": "2023大突破"},
                 {"q": "哪位成員小時候夢想是魔術師？", "a": "TAEHYUN", "options": ["TAEHYUN", "YEONJUN", "SOOBIN", "BEOMGYU"], "hint": "魔術"},
-                {"q": "哪位成員英文名叫 Daniel？", "a": "HUENING KAI", "options": ["HUENING KAI", "YEONJUN", "SOOBIN", "BEOMGYU"], "hint": "Daniel"},
+                {"q": "成員 YEONJUN 曾經在哪個城市居住？", "a": "聖荷西", "options": ["聖荷西", "紐約", "倫敦", "巴黎"], "hint": "加州"},
                 {"q": "成員中誰是 01 年生？", "a": "BEOMGYU", "options": ["BEOMGYU", "SOOBIN", "YEONJUN", "TAEHYUN"], "hint": "01"},
                 {"q": "TXT 出道曲韓文歌名？", "a": "有一天頭上長了角", "options": ["有一天頭上長了角", "皇冠", "星星", "魔法"], "hint": "長了角"}
             ]
@@ -145,6 +145,19 @@ if 'game_initialized' not in st.session_state:
 # --- 2. 遊戲介面 ---
 st.title("💙 TXT 追星鐵粉大作戰 💛")
 
+# 側邊欄音樂與說明
+with st.sidebar:
+    st.write("### 🎵 背景音樂：MOA Diary")
+    st.markdown("""
+        <iframe width="100%" height="80" src="https://www.youtube.com/embed/XhPq2V_0B-E?autoplay=1&loop=1&playlist=XhPq2V_0B-E" 
+        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        """, unsafe_allow_html=True)
+    st.divider()
+    st.write("### 💙 Tomorrow X Together")
+    st.write("1. 難度分為三關。")
+    st.write("2. 每關隨機 30 題，累積答對 3 題即通關。")
+    st.write("3. 答錯直接換下一題。")
+
 if not st.session_state.game_finished:
     lv = st.session_state.current_level
     current_lv_data = st.session_state.levels[lv]
@@ -165,7 +178,6 @@ if not st.session_state.game_finished:
         with st.container(border=True):
             st.markdown(f"### Q: {current_q['q']}")
             
-            # 選擇題按鈕
             cols = st.columns(2)
             for i, option in enumerate(current_q["options"]):
                 with cols[i % 2]:
@@ -187,7 +199,6 @@ if not st.session_state.game_finished:
                                 st.session_state.current_level += 1
                                 st.session_state.correct_in_level = 0
                                 st.session_state.q_pool_idx = 0
-                                st.toast(f"🚀 通關！即將挑戰難度升級！")
                             else:
                                 st.session_state.game_finished = True
                         st.rerun()
@@ -195,8 +206,8 @@ if not st.session_state.game_finished:
             if st.button("💡 獲取 MOA 專屬提示"):
                 st.info(f"小提示：{current_q['hint']}")
     else:
-        st.error("😭 30 題機會用完了，看來還要再多看 TO DO 喔！")
-        if st.button("重新挑戰本關"):
+        st.error("😭 30 題機會用完了...")
+        if st.button("重新開始本關"):
             st.session_state.correct_in_level = 0
             st.session_state.q_pool_idx = 0
             random.shuffle(st.session_state.levels[lv]["questions"])
@@ -207,19 +218,11 @@ else:
     st.balloons()
     st.snow()
     st.markdown("<h1 style='text-align: center; color: #00A6E3;'>🏆 恭喜成為【TXT 傳奇級 MOA】！</h1>", unsafe_allow_html=True)
-    st.write(f"在三場挑戰中，你總共拿下了 {st.session_state.total_score} 分！")
+    st.write(f"在挑戰中，你總共拿下了 {st.session_state.total_score} 分！")
     
-    # PPULBATU 慶祝 GIF 💙
-    st.image("https://media.tenor.com/Co3t0_2Z8SEAAAAd/ppulbatu-txt.gif", caption="PPULBATU 全員為傳奇級 MOA 慶祝！✨", use_container_width=True)
+    # 修改：換成 TXT 團體慶祝照片
+    st.image("https://static.independent.co.uk/2021/05/19/16/TXT%20THE%20CHAOS%20CHAPTER%20FREEZE%20GROUP%20CONCEPT%20PHOTO%20WORLD.jpg", caption="TOMORROW X TOGETHER 為你的智慧喝采！💙", use_container_width=True)
     
     if st.button("重新開始 MOA 知識挑戰"):
         del st.session_state['game_initialized']
         st.rerun()
-
-# --- 4. 側邊欄 ---
-with st.sidebar:
-    st.write("### 💙 Tomorrow X Together")
-    st.write("這是一款專為 MOA 設計的挑戰。")
-    st.write("1. 難度從入門、進階到大師級。")
-    st.write("2. 每關隨機 30 題選題。")
-    st.write("3. 答錯直接換下一題，對 3 題即通關。")
