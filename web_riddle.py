@@ -82,4 +82,144 @@ if 'game_initialized' not in st.session_state:
                 {"q": "在《TO DO》廚房特輯中誰被封為大廚？", "a": "TAEHYUN", "options": ["TAEHYUN", "YEONJUN", "SOOBIN", "BEOMGYU"], "hint": "穩定發揮"},
                 {"q": "TXT 與 Coi Leray 合作的歌曲？", "a": "Happy Fools", "options": ["Happy Fools", "Magic", "Sugar Rush Ride", "Tinnitus"], "hint": "誘惑章節"},
                 {"q": "哪位成員是 SHINee 泰民的粉絲？", "a": "TAEHYUN", "options": ["TAEHYUN", "SOOBIN", "YEONJUN", "BEOMGYU"], "hint": "泰民粉絲"},
-                {"q": "成員 SOOBIN 最愛的飲品？", "a": "巧克力牛奶", "options": ["巧克力牛奶", "美式
+                {"q": "成員 SOOBIN 最愛的飲品？", "a": "巧克力牛奶", "options": ["巧克力牛奶", "美式咖啡", "綠茶", "可樂"], "hint": "甜甜的"},
+                {"q": "TXT 哪首歌曲有九又四分之三月台概念？", "a": "Run Away", "options": ["Run Away", "Crown", "Magic", "PUMA"], "hint": "哈利波特概念"},
+                {"q": "哪位成員是團內公認的模仿王？", "a": "BEOMGYU", "options": ["BEOMGYU", "YEONJUN", "SOOBIN", "HUENING KAI"], "hint": "模仿老闆最像"}
+            ]
+        },
+        3: {
+            "name": "🏆 第三關：TXT 鐵粉大師 (細節考驗)",
+            "pool": [
+                {"q": "SOOBIN 領養 Odi 的年份？", "a": "2021年", "options": ["2019年", "2020年", "2021年", "2022年"], "hint": "MOA 熟知的年份"},
+                {"q": "TAEHYUN 的視力曾經提過是多少？", "a": "1.5", "options": ["1.0", "1.5", "0.5", "2.0"], "hint": "非常好"},
+                {"q": "YEONJUN 出道預告公開日期？", "a": "2019年1月11日", "options": ["2019年1月11日", "2019年1月10日", "2019年3月4日", "2019年2月1日"], "hint": "第一個成員"},
+                {"q": "SOOBIN 出道初期官方體重設定？", "a": "67kg", "options": ["60kg", "67kg", "72kg", "75kg"], "hint": "185cm 的他很瘦"},
+                {"q": "哪次巡演名稱是 ACT: LOVE SICK？", "a": "2022年首場巡演", "options": ["2022年首場巡演", "2023年巡演", "2024年巡演", "2019年秀"], "hint": "LOVE SICK"},
+                {"q": "YEONJUN 的手掌大約多長？", "a": "19cm", "options": ["15cm", "17cm", "19cm", "21cm"], "hint": "大手"},
+                {"q": "HUENING KAI 最愛的娃娃品牌？", "a": "Molang", "options": ["Molang", "Disney", "Sanrio", "BT21"], "hint": "白色兔子"},
+                {"q": "哪位成員最怕酪梨的口感？", "a": "SOOBIN", "options": ["SOOBIN", "YEONJUN", "BEOMGYU", "TAEHYUN"], "hint": "像肥皂"},
+                {"q": "TXT 在 Lollapalooza 主舞台領銜嘉賓年份？", "a": "2023年", "options": ["2021年", "2022年", "2023年", "2024年"], "hint": "歷史紀錄"},
+                {"q": "SOOBIN 的生日月份與日期？", "a": "12月5日", "options": ["12月5日", "12月4日", "12月6日", "12月10日"], "hint": "射手座"},
+                {"q": "BEOMGYU 最討厭吃的水果 (他覺得是蔬菜)？", "a": "番茄", "options": ["番茄", "西瓜", "香蕉", "蘋果"], "hint": "紅紅的"},
+                {"q": "YEONJUN BIGHIT 面試曲？", "a": "Boy In Luv", "options": ["Boy In Luv", "Baby", "Rainism", "Growl"], "hint": "BTS 前輩歌"},
+                {"q": "TXT 第一張日語專輯名稱？", "a": "STILL DREAMING", "options": ["STILL DREAMING", "SWEET", "DRAMA", "MAGIC"], "hint": "還在夢中"},
+                {"q": "哪首歌曲 MV 出現「火海」與「操場」？", "a": "Run Away", "options": ["Run Away", "Crown", "Blue Hour", "Magic Island"], "hint": "九又四分之三"},
+                {"q": "HUENING KAI 在中國居住過大約多久？", "a": "7年", "options": ["2年", "5年", "7年", "10年"], "hint": "小時候"},
+                {"q": "BEOMGYU 被挖掘的地點？", "a": "大邱街頭", "options": ["大邱街頭", "首爾地鐵", "學校", "海邊"], "hint": "特地去找他"},
+                {"q": "哪首歌在 2024 年破 2 億播放？", "a": "Sugar Rush Ride", "options": ["Sugar Rush Ride", "Crown", "Blue Hour", "Run Away"], "hint": "性感風"},
+                {"q": "哪位成員被稱為遊戲黑洞？", "a": "SOOBIN", "options": ["SOOBIN", "YEONJUN", "TAEHYUN", "BEOMGYU"], "hint": "努力但手氣差"},
+                {"q": "成員中誰的身高是 177cm？", "a": "TAEHYUN", "options": ["TAEHYUN", "BEOMGYU", "SOOBIN", "YEONJUN"], "hint": "隊內最小隻"},
+                {"q": "TXT 哪位成員最怕鬼且反應最大？", "a": "BEOMGYU", "options": ["BEOMGYU", "YEONJUN", "TAEHYUN", "HUENING KAI"], "hint": "反應超搞笑"},
+                {"q": "TXTDone 第一張預告照文字？", "a": "What do you do?", "options": ["What do you do?", "Who am I?", "Hello Tomorrow", "Together"], "hint": "問句"},
+                {"q": "成員 YEONJUN 的手掌寬度大約？", "a": "19cm", "options": ["15cm", "17cm", "19cm", "21cm"], "hint": "重複考驗"},
+                {"q": "哪位成員最喜歡薄荷巧克力？", "a": "YEONJUN/HUENING", "options": ["YEONJUN/HUENING", "SOOBIN", "BEOMGYU", "TAEHYUN"], "hint": "薄巧戰士"},
+                {"q": "SOOBIN 的酒量大約？", "a": "半瓶燒酒", "options": ["半瓶燒酒", "三瓶燒酒", "一杯醉", "十瓶"], "hint": "自爆過"},
+                {"q": "哪位成員擅長拳擊？", "a": "TAEHYUN", "options": ["TAEHYUN", "YEONJUN", "SOOBIN", "BEOMGYU"], "hint": "練習生時期"},
+                {"q": "TXT 首個大賞獎項來自？", "a": "The Fact Music Awards", "options": ["The Fact", "MAMA", "MMA", "Golden Disc"], "hint": "2023大突破"},
+                {"q": "哪位成員小時候夢想是魔術師？", "a": "TAEHYUN", "options": ["TAEHYUN", "YEONJUN", "SOOBIN", "BEOMGYU"], "hint": "魔術"},
+                {"q": "哪位成員英文名叫 Daniel？", "a": "HUENING KAI", "options": ["HUENING KAI", "YEONJUN", "SOOBIN", "BEOMGYU"], "hint": "Daniel"},
+                {"q": "成員中誰是 01 年生？", "a": "BEOMGYU", "options": ["BEOMGYU", "SOOBIN", "YEONJUN", "TAEHYUN"], "hint": "01"},
+                {"q": "TXT 出道曲韓文歌名？", "a": "有一天頭上長了角", "options": ["有一天頭上長了角", "皇冠", "星星", "魔法"], "hint": "長了角"}
+            ]
+        }
+    }
+
+    # 初始化每一關的題目
+    st.session_state.levels = {}
+    for i in [1, 2, 3]:
+        shuffled_pool = random.sample(raw_levels[i]["pool"], 30)
+        for item in shuffled_pool:
+            random.shuffle(item["options"])
+        st.session_state.levels[i] = {
+            "name": raw_levels[i]["name"],
+            "questions": shuffled_pool
+        }
+
+    st.session_state.current_level = 1
+    st.session_state.correct_in_level = 0
+    st.session_state.q_pool_idx = 0
+    st.session_state.total_score = 0
+    st.session_state.game_finished = False
+    st.session_state.game_initialized = True
+
+# --- 2. 遊戲介面 ---
+st.title("💙 TXT 追星鐵粉大作戰 💛")
+
+if not st.session_state.game_finished:
+    lv = st.session_state.current_level
+    current_lv_data = st.session_state.levels[lv]
+    
+    st.subheader(f"當前進度：{current_lv_data['name']}")
+    
+    col_a, col_b = st.columns(2)
+    with col_a:
+        st.write(f"本關答對：**{st.session_state.correct_in_level} / 3**")
+    with col_b:
+        st.write(f"剩餘挑戰：**{30 - st.session_state.q_pool_idx}** 題")
+    
+    st.progress(st.session_state.correct_in_level / 3)
+
+    if st.session_state.q_pool_idx < 30:
+        current_q = current_lv_data["questions"][st.session_state.q_pool_idx]
+
+        with st.container(border=True):
+            st.markdown(f"### Q: {current_q['q']}")
+            
+            # 選擇題按鈕
+            cols = st.columns(2)
+            for i, option in enumerate(current_q["options"]):
+                with cols[i % 2]:
+                    if st.button(option, key=f"btn_{lv}_{st.session_state.q_pool_idx}_{i}", use_container_width=True):
+                        if option == current_q["a"]:
+                            st.success("✨ 答對了！不愧是 MOA！")
+                            st.session_state.correct_in_level += 1
+                            st.session_state.total_score += 1
+                        else:
+                            st.error(f"❌ 答錯了！正確答案是「{current_q['a']}」")
+                        
+                        time.sleep(1.2)
+                        st.session_state.q_pool_idx += 1
+                        
+                        if st.session_state.correct_in_level >= 3:
+                            if lv < 3:
+                                st.balloons()
+                                if lv == 2: st.snow()
+                                st.session_state.current_level += 1
+                                st.session_state.correct_in_level = 0
+                                st.session_state.q_pool_idx = 0
+                                st.toast(f"🚀 通關！即將挑戰難度升級！")
+                            else:
+                                st.session_state.game_finished = True
+                        st.rerun()
+            
+            if st.button("💡 獲取 MOA 專屬提示"):
+                st.info(f"小提示：{current_q['hint']}")
+    else:
+        st.error("😭 30 題機會用完了，看來還要再多看 TO DO 喔！")
+        if st.button("重新挑戰本關"):
+            st.session_state.correct_in_level = 0
+            st.session_state.q_pool_idx = 0
+            random.shuffle(st.session_state.levels[lv]["questions"])
+            st.rerun()
+
+else:
+    # --- 3. 終極通關 ---
+    st.balloons()
+    st.snow()
+    st.markdown("<h1 style='text-align: center; color: #00A6E3;'>🏆 恭喜成為【TXT 傳奇級 MOA】！</h1>", unsafe_allow_html=True)
+    st.write(f"在三場挑戰中，你總共拿下了 {st.session_state.total_score} 分！")
+    
+    # 啦啦隊慶祝 GIF (穩定網址)
+    st.image("https://media.giphy.com/media/l41lYCDgxP665gjVm/giphy.gif", caption="啦啦隊為你的智慧喝采！🎉", use_container_width=True)
+    
+    if st.button("重新開始 MOA 知識挑戰"):
+        del st.session_state['game_initialized']
+        st.rerun()
+
+# --- 4. 側邊欄 ---
+with st.sidebar:
+    st.write("### 💙 Tomorrow X Together")
+    st.write("這是一款專為 MOA 設計的挑戰。")
+    st.write("1. 難度從入門、進階到大師級。")
+    st.write("2. 每關隨機 30 題選題。")
+    st.write("3. 答錯直接換下一題，對 3 題即通關。")
