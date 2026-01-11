@@ -209,8 +209,8 @@ else:
     st.markdown("<h1 style='text-align: center; color: #00A6E3;'>🏆 恭喜成為【TXT 傳奇級 MOA】！</h1>", unsafe_allow_html=True)
     st.write(f"在三場挑戰中，你總共拿下了 {st.session_state.total_score} 分！")
     
-    # 啦啦隊慶祝 GIF (穩定網址)
-    st.image("https://media.giphy.com/media/l41lYCDgxP665gjVm/giphy.gif", caption="啦啦隊為你的智慧喝采！🎉", use_container_width=True)
+    # PPULBATU 慶祝 GIF 💙
+    st.image("https://media.tenor.com/Co3t0_2Z8SEAAAAd/ppulbatu-txt.gif", caption="PPULBATU 全員為傳奇級 MOA 慶祝！✨", use_container_width=True)
     
     if st.button("重新開始 MOA 知識挑戰"):
         del st.session_state['game_initialized']
