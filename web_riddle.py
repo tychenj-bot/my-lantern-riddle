@@ -3,19 +3,53 @@ import random
 import time
 
 # 設定網頁標題與風格
-st.set_page_config(page_title="TXT 追星鐵粉大作戰", page_icon="💙")
+st.set_page_config(page_title="TXT 追星鐵粉大作戰", page_icon="💙", layout="centered")
 
-# 自定義 TXT 專屬 CSS 風格
+# --- CSS 優化：背景圖與卡片質感 ---
+# 這裡使用 CSS 製作微微的漸層背景，讓質感提升
 st.markdown("""
     <style>
-    .stApp { background-color: #F0F8FF; }
-    .stButton>button { background-color: #00A6E3; color: white; border-radius: 10px; }
-    .stProgress > div > div > div > div { background-color: #00A6E3; }
+    /* 全站背景：淡藍色漸層 */
+    .stApp {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+    
+    /* 標題顏色 */
+    h1, h2, h3 {
+        color: #00A6E3;
+        font-family: 'Helvetica', sans-serif;
+    }
+    
+    /* 按鈕樣式：TXT 代表色 */
+    .stButton>button {
+        background-color: #00A6E3;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 10px 24px;
+        font-weight: bold;
+        transition: all 0.3s;
+        width: 100%;
+    }
+    .stButton>button:hover {
+        background-color: #0081B3;
+        transform: scale(1.02);
+    }
+    
+    /* 進度條顏色 */
+    .stProgress > div > div > div > div {
+        background-color: #00A6E3;
+    }
+    
+    /* 資訊框優化 */
+    .stAlert {
+        border-radius: 15px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# --- 1. 完整 90 題校訂題庫 ---
-if 'game_initialized' not in st.session_state:
+# --- 1. 完整 90 題題庫 ---
+if 'game_data_loaded' not in st.session_state:
     raw_levels = {
         1: {
             "name": "🌱 第一關：MOA 初級生 (基本資料)",
@@ -124,7 +158,7 @@ if 'game_initialized' not in st.session_state:
         }
     }
 
-    # 初始化每一關的題目
+    # 初始化隨機題庫
     st.session_state.levels = {}
     for i in [1, 2, 3]:
         shuffled_pool = random.sample(raw_levels[i]["pool"], 30)
@@ -140,50 +174,79 @@ if 'game_initialized' not in st.session_state:
     st.session_state.q_pool_idx = 0
     st.session_state.total_score = 0
     st.session_state.game_finished = False
-    st.session_state.game_initialized = True
+    st.session_state.game_started = False
+    st.session_state.game_data_loaded = True
 
-# --- 2. 遊戲介面 ---
-st.title("💙 TXT 追星鐵粉大作戰 💛")
-
-# 側邊欄音樂與說明
+# --- 2. 側邊欄 (音樂播放器) ---
 with st.sidebar:
     st.write("### 🎵 背景音樂：MOA Diary")
     st.markdown("""
         <iframe width="100%" height="80" src="https://www.youtube.com/embed/XhPq2V_0B-E?autoplay=1&loop=1&playlist=XhPq2V_0B-E" 
         frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         """, unsafe_allow_html=True)
+    st.info("💡 建議點擊播放器，享受音樂！")
     st.divider()
-    st.write("### 💙 Tomorrow X Together")
-    st.write("1. 難度分為三關。")
-    st.write("2. 每關隨機 30 題，累積答對 3 題即通關。")
-    st.write("3. 答錯直接換下一題。")
+    st.write("### 💙 遊戲規則")
+    st.write("1. 難度分為三關，從入門到大師。")
+    st.write("2. 每關隨機抽取 30 題。")
+    st.write("3. 累積答對 3 題即可晉級下一關。")
+    st.write("4. 答錯會直接跳到下一題。")
 
-if not st.session_state.game_finished:
+# --- 3. 遊戲流程控制 ---
+
+# [首頁] 尚未開始遊戲
+if not st.session_state.game_started:
+    st.title("💙 TXT 追星鐵粉大作戰")
+    st.markdown("### Welcome, MOA! ✨")
+    
+    # 使用 TXT 團體照作為封面
+    st.image("https://ibighit.com/txt/images/txt/profile/profile_header.jpg", use_container_width=True)
+    
+    st.markdown("""
+    你對 **TOMORROW X TOGETHER** 有多了解？
+    
+    從出道日到成員小習慣，從綜藝梗到專輯細節...
+    只有真正的 **傳奇級 MOA** 才能通過這三關考驗！
+    
+    準備好了嗎？
+    """)
+    
+    if st.button("🚀 開始挑戰"):
+        st.session_state.game_started = True
+        st.rerun()
+
+# [遊戲中]
+elif not st.session_state.game_finished:
+    st.title("💙 TXT 追星鐵粉大作戰")
     lv = st.session_state.current_level
     current_lv_data = st.session_state.levels[lv]
     
-    st.subheader(f"當前進度：{current_lv_data['name']}")
+    # 關卡標題
+    st.subheader(f"{current_lv_data['name']}")
     
-    col_a, col_b = st.columns(2)
-    with col_a:
-        st.write(f"本關答對：**{st.session_state.correct_in_level} / 3**")
-    with col_b:
-        st.write(f"剩餘挑戰：**{30 - st.session_state.q_pool_idx}** 題")
+    # 進度儀表板
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("本關答對", f"{st.session_state.correct_in_level} / 3")
+    with col2:
+        st.metric("剩餘題目", f"{30 - st.session_state.q_pool_idx}")
     
+    # 進度條
     st.progress(st.session_state.correct_in_level / 3)
 
     if st.session_state.q_pool_idx < 30:
         current_q = current_lv_data["questions"][st.session_state.q_pool_idx]
 
         with st.container(border=True):
-            st.markdown(f"### Q: {current_q['q']}")
+            st.markdown(f"#### Q: {current_q['q']}")
             
+            # 兩欄排列選項按鈕
             cols = st.columns(2)
             for i, option in enumerate(current_q["options"]):
                 with cols[i % 2]:
                     if st.button(option, key=f"btn_{lv}_{st.session_state.q_pool_idx}_{i}", use_container_width=True):
                         if option == current_q["a"]:
-                            st.success("✨ 答對了！不愧是 MOA！")
+                            st.success("✨ 答對了！MOA 實力認證！")
                             st.session_state.correct_in_level += 1
                             st.session_state.total_score += 1
                         else:
@@ -192,6 +255,7 @@ if not st.session_state.game_finished:
                         time.sleep(1.2)
                         st.session_state.q_pool_idx += 1
                         
+                        # 檢查過關
                         if st.session_state.correct_in_level >= 3:
                             if lv < 3:
                                 st.balloons()
@@ -199,30 +263,47 @@ if not st.session_state.game_finished:
                                 st.session_state.current_level += 1
                                 st.session_state.correct_in_level = 0
                                 st.session_state.q_pool_idx = 0
+                                st.toast(f"🚀 通關！下一關難度升級！")
                             else:
                                 st.session_state.game_finished = True
                         st.rerun()
             
+            # 提示按鈕
             if st.button("💡 獲取 MOA 專屬提示"):
                 st.info(f"小提示：{current_q['hint']}")
     else:
-        st.error("😭 30 題機會用完了...")
-        if st.button("重新開始本關"):
+        # 題目用完失敗
+        st.error("😭 30 題機會用完了... 看來還需要再去補檔 TO DO 喔！")
+        if st.button("🔄 重新挑戰本關"):
             st.session_state.correct_in_level = 0
             st.session_state.q_pool_idx = 0
             random.shuffle(st.session_state.levels[lv]["questions"])
             st.rerun()
 
+# [通關畫面]
 else:
-    # --- 3. 終極通關 ---
     st.balloons()
     st.snow()
-    st.markdown("<h1 style='text-align: center; color: #00A6E3;'>🏆 恭喜成為【TXT 傳奇級 MOA】！</h1>", unsafe_allow_html=True)
-    st.write(f"在挑戰中，你總共拿下了 {st.session_state.total_score} 分！")
+    st.title("🏆 恭喜成為【TXT 傳奇級 MOA】！")
     
-    # 修改：換成 TXT 團體慶祝照片
-    st.image("https://static.independent.co.uk/2021/05/19/16/TXT%20THE%20CHAOS%20CHAPTER%20FREEZE%20GROUP%20CONCEPT%20PHOTO%20WORLD.jpg", caption="TOMORROW X TOGETHER 為你的智慧喝采！💙", use_container_width=True)
+    st.markdown(f"""
+    <div style="text-align: center; padding: 20px; background-color: #ffffff; border-radius: 10px; border: 2px solid #00A6E3;">
+        <h3>🎉 挑戰成功 🎉</h3>
+        <p>你在三關知識大作戰中，總共拿下了 <strong>{st.session_state.total_score}</strong> 分！</p>
+        <p>你是真正的 MOA，TXT 為你感到驕傲！💙</p>
+    </div>
+    """, unsafe_allow_html=True)
     
-    if st.button("重新開始 MOA 知識挑戰"):
-        del st.session_state['game_initialized']
+    st.write("") # 空行
+    
+    # 團體慶祝照片
+    st.image("https://static.independent.co.uk/2021/05/19/16/TXT%20THE%20CHAOS%20CHAPTER%20FREEZE%20GROUP%20CONCEPT%20PHOTO%20WORLD.jpg", caption="TOMORROW X TOGETHER 為你喝采！💙", use_container_width=True)
+    
+    # 分享戰績文字
+    st.info("👇 複製下方文字分享給朋友：")
+    st.code(f"我是 TXT 傳奇級 MOA！💙\n在知識大作戰中通過了所有考驗，獲得 {st.session_state.total_score} 分！\n你也來挑戰看看吧！ #TXT #MOA #KPOP", language="text")
+    
+    if st.button("🔄 重新開始挑戰"):
+        del st.session_state['game_data_loaded']
+        st.session_state.game_started = False
         st.rerun()
